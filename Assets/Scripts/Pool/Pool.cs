@@ -125,7 +125,7 @@ namespace Core.Utilities
                 default:
                     break;
             }
-            Debug.LogWarning($"{typeof(T)} pool expanded using {expandMethod} method. New size = {poolSize}");
+            //Debug.LogWarning($"{typeof(T)} pool expanded using {expandMethod} method. New size = {poolSize}");
         }
 
         private void Resize(int desiredPoolSize)
