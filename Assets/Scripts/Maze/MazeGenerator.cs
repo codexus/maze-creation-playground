@@ -19,6 +19,8 @@ namespace Codexus.Maze
             {
                 case GenerationStrategyType.RecursiveBacktrackingStrategy:
                     return new RecursiveBacktrackingStrategy();
+                case GenerationStrategyType.HuntAndKillStrategy:
+                    return new HuntAndKillStrategy();
                 default:
                     return new RecursiveBacktrackingStrategy();
             }
