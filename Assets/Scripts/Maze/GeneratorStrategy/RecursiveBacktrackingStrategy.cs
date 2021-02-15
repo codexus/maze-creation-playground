@@ -17,13 +17,13 @@ namespace Codexus.Maze
             Vector2Int startPosition = new Vector2Int(0, 0);
 
             Carve(startPosition, grid);
+            Print(grid);
             return grid;
-            //Print(grid);
         }
 
         DirectionFlag[,] CreateGrid(Vector2Int dimension)
         {
-            DirectionFlag[,] grid = new DirectionFlag[dimension.x, dimension.y];
+            DirectionFlag[,] grid = new DirectionFlag[dimension.y, dimension.x];
 
             for (int i = 0; i < dimension.y; i++)
             {
@@ -46,8 +46,9 @@ namespace Codexus.Maze
                 Vector2Int newPosition = new Vector2Int(startPosition.x + directions[i].DirectionXIndex(), startPosition.y + directions[i].DirectionYIndex());
                 if(IsValid(newPosition, grid))
                 {
+                    DirectionFlag dir = directions[i];
                     grid[startPosition.y, startPosition.x] = grid[startPosition.y, startPosition.x] ^ directions[i]; // remove the wall of the current cell
-                    grid[newPosition.y, newPosition.x] = grid[startPosition.y, startPosition.x] ^ directions[i].OppositeDirection(); // remove the wall from the next cell
+                    grid[newPosition.y, newPosition.x] = grid[newPosition.y, newPosition.x] ^ directions[i].OppositeDirection(); // remove the wall from the next cell
                     Carve(newPosition, grid);
                 }
             }
@@ -56,7 +57,7 @@ namespace Codexus.Maze
         private bool IsValid(Vector2Int position, DirectionFlag[,] grid)
         {
             return
-                position.y >= 0 && position.y <= grid.GetLength(0) - 1 &&
+                position.y >= 0 && position.y <= grid.GetLength(0) - 1 && // check if we are 
                 position.x >= 0 && position.x <= grid.GetLength(1) - 1 &&
                 grid[position.y, position.x] == ALL_DIRECTIONS;
         }
@@ -64,13 +65,24 @@ namespace Codexus.Maze
         private void Print(DirectionFlag[,] grid)
         {
             string s = "";
-            for (int i = 0; i < grid.GetLength(1); i++)
+
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                for (int j = 0; j < grid.GetLength(0); j++)
+                for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    s += grid[i, j].ToString() + "|"; // initialize 
+                    s += grid[i, j].BitwiseHasFlag(DirectionFlag.S) ? " " : "_";
+                    if(grid[i, j].BitwiseHasFlag(DirectionFlag.E))
+                    {
+                        if (j + 1 >= grid.GetLength(1)) continue;
+                        DirectionFlag testFlag = grid[i, j] | grid[i, j + 1];
+                        s += testFlag.BitwiseHasFlag(DirectionFlag.S) ? " " : "_";
+                    }
+                    else
+                    {
+                        s += "|";
+                    }
                 }
-                s += "/n";
+                s += "\n";
             }
 
             Debug.Log(s);
