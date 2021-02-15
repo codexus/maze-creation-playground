@@ -17,7 +17,6 @@ namespace Codexus.Maze
             Vector2Int startPosition = new Vector2Int(0, 0);
 
             Carve(startPosition, grid);
-            Print(grid);
             return grid;
         }
 
@@ -61,33 +60,5 @@ namespace Codexus.Maze
                 position.x >= 0 && position.x <= grid.GetLength(1) - 1 &&
                 grid[position.y, position.x] == ALL_DIRECTIONS;
         }
-
-        private void Print(DirectionFlag[,] grid)
-        {
-            string s = "";
-
-            for (int i = 0; i < grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < grid.GetLength(1); j++)
-                {
-                    s += grid[i, j].BitwiseHasFlag(DirectionFlag.S) ? " " : "_";
-                    if(grid[i, j].BitwiseHasFlag(DirectionFlag.E))
-                    {
-                        if (j + 1 >= grid.GetLength(1)) continue;
-                        DirectionFlag testFlag = grid[i, j] | grid[i, j + 1];
-                        s += testFlag.BitwiseHasFlag(DirectionFlag.S) ? " " : "_";
-                    }
-                    else
-                    {
-                        s += "|";
-                    }
-                }
-                s += "\n";
-            }
-
-            Debug.Log(s);
-        }
-
-
     }
 }
