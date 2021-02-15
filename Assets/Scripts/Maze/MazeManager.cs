@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Codexus.Maze
 {
-    public class Maze : MonoBehaviour
+    public class MazeManager : MonoBehaviour
     {
         [SerializeField] private MazeGenerator mazeGenerator;
         [SerializeField] private MazeCell mazeCellPrefab;
@@ -13,11 +13,9 @@ namespace Codexus.Maze
         private Pool<MazeCell> pool;
         private DirectionFlag[,] grid;
 
-        private void Start()
+        private void Awake()
         {
             pool = new Pool<MazeCell>(mazeCellPrefab, transform);
-            grid = mazeGenerator.Generate();
-            CreateVisualMaze(grid);
         }
 
         private void CreateVisualMaze(DirectionFlag[,] grid)
@@ -27,9 +25,15 @@ namespace Codexus.Maze
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     pool.Spawn(new Vector3(j, 0, -i), Quaternion.identity).Initialize(grid[i, j]);
-                    Debug.Log(grid[i, i]);
                 }
             }
+        }
+
+        public void RegenerateMaze()
+        {
+            pool.ClearPool();
+            grid = mazeGenerator.Generate();
+            CreateVisualMaze(grid);
         }
     }
 }

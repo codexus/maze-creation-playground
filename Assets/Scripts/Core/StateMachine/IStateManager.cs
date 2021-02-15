@@ -2,10 +2,10 @@
 
 namespace Core.States
 {
-    public interface IStateManager<U>
+    public interface IStateManager<T>
     {
-        event Action<U> OnStateChanged;
-        void SwitchState(U stateType);
+        event Action<T> OnStateChanged;
+        void SwitchState(T stateType);
         void SwitchToPrevious();
     }
 }

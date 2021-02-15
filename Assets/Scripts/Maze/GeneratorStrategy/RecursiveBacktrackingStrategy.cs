@@ -2,13 +2,19 @@ using UnityEngine;
 
 namespace Codexus.Maze
 {
+    /// <summary>
+    /// Recursive backtracking algorithm for maze generation. Requires that
+    /// the entire maze be stored in memory, but is quite fast.
+    ///
+    /// 1. Choose a starting point in the field.
+    /// 2. Randomly choose a wall at that point and carve a passage through to the adjacent cell, but only if the adjacent cell has not been visited yet. This becomes the new current cell.
+    /// 3. If all adjacent cells have been visited, back up to the last cell that has uncarved walls and repeat.
+    /// 4. The algorithm ends when the process has backed all the way up to the starting point.
+
+    /// </summary>
     public class RecursiveBacktrackingStrategy : IMazeGenerationStrategy
     {
-        // Holds the flag for all directions
-        // It will help us to tell if the traversed cell wasn't visited before
-        public const DirectionFlag ALL_DIRECTIONS = DirectionFlag.E | DirectionFlag.N | DirectionFlag.S | DirectionFlag.W;
-
-        // Cached directions for 
+        // Cached directions
         DirectionFlag[] directions = MazeExtensions.GetValues<DirectionFlag>();
         
         public DirectionFlag[,] Generate(Vector2Int dimension)
@@ -20,7 +26,7 @@ namespace Codexus.Maze
             return grid;
         }
 
-        DirectionFlag[,] CreateGrid(Vector2Int dimension)
+        private DirectionFlag[,] CreateGrid(Vector2Int dimension)
         {
             DirectionFlag[,] grid = new DirectionFlag[dimension.y, dimension.x];
 
@@ -28,7 +34,7 @@ namespace Codexus.Maze
             {
                 for (int j = 0; j < dimension.x; j++)
                 {
-                    grid[i, j] = ALL_DIRECTIONS; // initialize 
+                    grid[i, j] = DirectionExtensions.ALL_DIRECTIONS; // initialize 
                 }
             }
 
@@ -58,7 +64,7 @@ namespace Codexus.Maze
             return
                 position.y >= 0 && position.y <= grid.GetLength(0) - 1 && // check if we are 
                 position.x >= 0 && position.x <= grid.GetLength(1) - 1 &&
-                grid[position.y, position.x] == ALL_DIRECTIONS;
+                grid[position.y, position.x] == DirectionExtensions.ALL_DIRECTIONS;
         }
     }
 }

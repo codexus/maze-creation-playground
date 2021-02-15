@@ -22,11 +22,6 @@ namespace Core.UI
 
             canvas = GetComponent<Canvas>();
 
-            if (canvas.renderMode != RenderMode.ScreenSpaceCamera)
-            {
-                Debug.LogWarning("Canvas render mode should be set to screen space camera. Recording may not work as expected.", this);
-            }
-
             foreach (var view in viewsReferences)
             {
                 viewsDictionary.Add(view.GetType(), view);

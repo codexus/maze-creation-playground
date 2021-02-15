@@ -4,6 +4,10 @@ namespace Codexus.Maze
 {
     public static class DirectionExtensions
     {
+        // Holds the flag for all directions
+        // It will help us to tell if the traversed cell wasn't visited before
+        public const DirectionFlag ALL_DIRECTIONS = DirectionFlag.E | DirectionFlag.N | DirectionFlag.S | DirectionFlag.W;
+
         private static Dictionary<DirectionFlag, int> DirectionX = new Dictionary<DirectionFlag, int>
         {
             { DirectionFlag.E, 1 },

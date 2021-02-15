@@ -4,26 +4,26 @@ using UnityEngine;
 
 namespace Core.States
 {
-    public abstract class StateManager<U> : IStateManager<U> where U : Enum
+    public abstract class StateManager<T> : IStateManager<T> where T : Enum
     {
-        private U initialState;
+        private T initialState;
 
-        private Dictionary<U, State<U>> states;
+        private Dictionary<T, State<T>> states;
 
-        protected State<U>[] statesArray;
+        protected State<T>[] statesArray;
 
-        public event Action<U> OnStateChanged = delegate { };
+        public event Action<T> OnStateChanged = delegate { };
 
-        public State<U> PreviousState { get; private set; }
+        public State<T> PreviousState { get; private set; }
 
-        public State<U> CurrentState { get; private set; }
+        public State<T> CurrentState { get; private set; }
 
-        public State<U> NextState { get; private set; }
+        public State<T> NextState { get; private set; }
 
         public virtual void Initialize()
         {
             var appStates = statesArray;
-            states = new Dictionary<U, State<U>>();
+            states = new Dictionary<T, State<T>>();
 
             foreach (var state in appStates)
             {
@@ -33,7 +33,7 @@ namespace Core.States
             Debug.LogFormat("[StatesManager] Initialized with state ({0}).", initialState.ToString());
         }
 
-        private void RegisterState(State<U> newState)
+        private void RegisterState(State<T> newState)
         {
             if (states.ContainsKey(newState.GetStateType()))
             {
@@ -44,7 +44,7 @@ namespace Core.States
             states.Add(newState.GetStateType(), newState);
         }
 
-        public void SwitchState(U stateType)
+        public void SwitchState(T stateType)
         {
             NextState = states[stateType];
 
@@ -78,7 +78,7 @@ namespace Core.States
             SwitchState(PreviousState.GetStateType());
         }
 
-        protected void SetInitialState(U initialState)
+        protected void SetInitialState(T initialState)
         {
             this.initialState = initialState;
         }
