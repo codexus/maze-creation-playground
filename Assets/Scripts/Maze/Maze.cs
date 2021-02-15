@@ -9,7 +9,7 @@ namespace Codexus.Maze
         [SerializeField] private MazeGenerator mazeGenerator;
         [SerializeField] private MazeCell mazeCellPrefab;
 
-        // I'm using the pool for holding the cells, but the prefab is marked as static for optimization purpouse.
+        // Note that I'm using the pool for holding the cells, but the prefab is marked as static for optimization purpouse.
         private Pool<MazeCell> pool;
         private DirectionFlag[,] grid;
 
@@ -22,11 +22,12 @@ namespace Codexus.Maze
 
         private void CreateVisualMaze(DirectionFlag[,] grid)
         {
-            for (int i = 0; i < grid.GetLength(1); i++)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                for (int j = 0; j < grid.GetLength(0); j++)
+                for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    pool.Spawn(new Vector3(-i, 0, j), Quaternion.identity).Initialize(grid[i,j]);
+                    pool.Spawn(new Vector3(j, 0, -i), Quaternion.identity).Initialize(grid[i, j]);
+                    Debug.Log(grid[i, i]);
                 }
             }
         }
