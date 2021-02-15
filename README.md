@@ -16,3 +16,5 @@ Views are driven by the view manager that could handle animations easily.
 The Cells are spawned using pool.
 
 All the code was written by myself and the only 3rd party lib was TextMeshPro.
+
+Unity version 2020.2.3f1
