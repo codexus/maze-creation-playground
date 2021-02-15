@@ -39,7 +39,7 @@ namespace Codexus.Maze
         }
 
         /// <summary>
-        /// Returns X index to traverse
+        /// Returns x index to traverse
         /// </summary>
         /// <param name="direction"></param>
         /// <returns></returns>
@@ -48,9 +48,21 @@ namespace Codexus.Maze
             return DirectionX[direction];
         }
 
+        /// <summary>
+        /// Returns y index to traverse
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <returns></returns>
         public static int DirectionYIndex(this DirectionFlag direction)
         {
             return DirectionY[direction];
+        }
+
+        // We do have directionFlag.HasFlag but we want to avoid it since it is much more resource-intensive including boxing,
+        // therefore we will use good'ol bitwise implementation.
+        public static bool BitwiseHasFlag(this DirectionFlag direction, DirectionFlag flag)
+        {
+            return (direction & flag) != 0;
         }
     }
 }
