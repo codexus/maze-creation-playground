@@ -1,4 +1,4 @@
-# maze-generation-playground
+# Maze generation playground
 
 Sample project to show different methods for maze generation.
 At this point there are two algorithms implemented:
