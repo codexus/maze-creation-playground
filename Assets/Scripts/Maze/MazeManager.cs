@@ -1,17 +1,17 @@
 using Core.Utilities;
-using System.Collections;
 using UnityEngine;
 
 namespace Codexus.Maze
 {
     public class MazeManager : MonoBehaviour
     {
-        [SerializeField] private MazeGenerator mazeGenerator;
+        [SerializeField] private MazeGenerator[] mazeGenerators;
         [SerializeField] private MazeCell mazeCellPrefab;
 
-        // Note that I'm using the pool for holding the cells, but the prefab is marked as static for optimization purpouse.
         private Pool<MazeCell> pool;
         private DirectionFlag[,] grid;
+
+        MazeGenerator currentMazeGenerator;
 
         private void Awake()
         {
@@ -31,9 +31,33 @@ namespace Codexus.Maze
 
         public void RegenerateMaze()
         {
+            if (mazeGenerators.Length == 0) return;
+            if (currentMazeGenerator == null) currentMazeGenerator = mazeGenerators[0];
             pool.ClearPool();
-            grid = mazeGenerator.Generate();
+            grid = currentMazeGenerator.Generate();
             CreateVisualMaze(grid);
+        }
+
+        public MazeGenerator[] GetMazeGenerators()
+        {
+            return mazeGenerators;
+        }
+
+        public int GetCurrentGeneratorIndex()
+        {
+            if (currentMazeGenerator == null) currentMazeGenerator = mazeGenerators[0];
+
+            for (int i = 0; i < mazeGenerators.Length; i++)
+            {
+                if (currentMazeGenerator == mazeGenerators[i]) return i;
+            }
+
+            return -1;
+        }
+
+        public void SetGenerationMethod(int index)
+        {
+            currentMazeGenerator = mazeGenerators[index];
         }
     }
 }

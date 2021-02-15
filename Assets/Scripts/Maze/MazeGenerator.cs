@@ -13,6 +13,8 @@ namespace Codexus.Maze
 
         private IMazeGenerationStrategy mazeGenerationStrategy;
 
+        public GenerationStrategyType GenerationStrategyType => generationStrategyType;
+
         private IMazeGenerationStrategy GetMazeGenerationStrategy(GenerationStrategyType generationStrategyType)
         {
             switch (generationStrategyType)

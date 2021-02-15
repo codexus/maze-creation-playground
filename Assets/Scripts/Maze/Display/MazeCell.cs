@@ -14,10 +14,10 @@ namespace Codexus.Maze
 
         public void Initialize(DirectionFlag directionFlag)
         {
-            wallE.gameObject.SetActive(directionFlag.HasFlag(DirectionFlag.E));
-            wallW.gameObject.SetActive(directionFlag.HasFlag(DirectionFlag.W));
-            wallN.gameObject.SetActive(directionFlag.HasFlag(DirectionFlag.N));
-            wallS.gameObject.SetActive(directionFlag.HasFlag(DirectionFlag.S));
+            wallE.gameObject.SetActive(directionFlag.BitwiseHasFlag(DirectionFlag.E));
+            wallW.gameObject.SetActive(directionFlag.BitwiseHasFlag(DirectionFlag.W));
+            wallN.gameObject.SetActive(directionFlag.BitwiseHasFlag(DirectionFlag.N));
+            wallS.gameObject.SetActive(directionFlag.BitwiseHasFlag(DirectionFlag.S));
         }
     }
 }

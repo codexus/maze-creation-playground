@@ -539,6 +539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maze
       objectReference: {fileID: 0}
+    - target: {fileID: 5954378007942422475, guid: ed1428f3e0307134999b719ea491db90, type: 3}
+      propertyPath: mazeGenerator
+      value: 
+      objectReference: {fileID: 11400000, guid: 76790b35f35997542994a3cb493408e7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed1428f3e0307134999b719ea491db90, type: 3}
 --- !u!1001 &6714302752663763250
@@ -604,5 +608,9 @@ PrefabInstance:
       propertyPath: viewManager
       value: 
       objectReference: {fileID: 692776794}
+    - target: {fileID: 8077952357436257263, guid: bec12b33e0f4bda409dc4b1865daea5a, type: 3}
+      propertyPath: initialState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bec12b33e0f4bda409dc4b1865daea5a, type: 3}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d4983e5d6f913c40b5646a73c964833, type: 3}
-  m_Name: RecursiveMazeGenerator
+  m_Name: RecursiveBacktrackingGenerator
   m_EditorClassIdentifier: 
-  mazeDimension: {x: 10, y: 10}
+  mazeDimension: {x: 14, y: 8}
   generationStrategyType: 0

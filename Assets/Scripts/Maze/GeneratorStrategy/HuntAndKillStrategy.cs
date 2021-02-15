@@ -77,7 +77,7 @@ namespace Codexus.Maze
         }
 
         /// <summary>
-        /// Enter “hunt” mode, where you scan the grid looking for an unvisited cell that is adjacent to a visited cell.
+        /// Scan the grid looking for an unvisited cell that is adjacent to a visited cell.
         /// </summary>
         /// <param name="position"></param>
         /// <param name="grid"></param>

@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fcc3b3571e99d408df8fcd30aa3af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeGenerator: {fileID: 11400000, guid: 50f85d1e92594d64097007936a2a1482, type: 2}
+  mazeGenerators:
+  - {fileID: 11400000, guid: 50f85d1e92594d64097007936a2a1482, type: 2}
+  - {fileID: 11400000, guid: 76790b35f35997542994a3cb493408e7, type: 2}
   mazeCellPrefab: {fileID: 2573037846278109164, guid: 12aba615bbe082e46bbfa8eb087d4015, type: 3}
